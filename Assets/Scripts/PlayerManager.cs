@@ -1,71 +1,73 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Drawing;
+﻿using System;
 using System.IO;
+using System.Drawing;
+using System.Threading;
+using System.Collections;
+using System.Collections.Generic;
+
 using Emgu.CV;
+using Emgu.CV.Util;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using Emgu.CV.Util;
-using System;
-using System.Threading;
 
+using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] [Range(0, 180)] float minValueH;[SerializeField] [Range(0, 255)] float minValueS, minValueV;
-    [SerializeField] [Range(0, 180)] float maxValueH;[SerializeField] [Range(0, 255)] float maxValueS, maxValueV;
+    [SerializeField] [Range(0, 179)] private float minValueH, maxValueH;
+    [SerializeField] [Range(0, 255)] private float minValueS, minValueV, maxValueS, maxValueV;
     [SerializeField] private PhysicMaterial bridgePhysicMaterial;
     [SerializeField] private Material bridgeMaterial;
 
     public static int windowWidth, windowHeight;
-    public static float bridgeMinimalArea; // RANGE(0.001f,  0.05f) 0.001f <=> 10‰ of screen space ; 0.05f <=>  5%
+    public static float bridgeMinimalArea; // RANGE(0.001f, 0.05f) 0.001f <=> 10‰ of screen space ; 0.05f <=> 5%
     public static int captureCyclesBuffer; // RANGE(1, 20) Keep the last 10 values and average them to get proper / less jerky movements instead of using last frame results only
-                                           // High value <=> High delay 
 
-    private static Hsv leftRangeColorHSVDrawing, rightRangeColorHSVDrawing;
     private static VideoCapture webcam;
     private static GameObject bridge;
     private static float bridgeYSize = 1.0f;
     private static float bridgeZSize = 1.0f;
     private static float bridgeZposition = 1.0f;
     private static Vector3 bottomLeftSreenInWorldSpace;
+
     // OpenCV inputs variables
     private static OpenCVInputBuffer<float> bridgeAngles;
     private static OpenCVInputBuffer<Vector3> normalizedBridgeCenters; // (0,0) <=> Bottom Left, (1,1) <=> Top Right corner
     private static OpenCVInputBuffer<float> bridgeXSizes;
     private static OpenCVInputBuffer<float> bridgeScreenSpacePorcentages;
+
     // fixedUpdate variables for bridge's movements
-    Rigidbody bridgeRigidBody;
+    private Rigidbody bridgeRigidBody;
     private Vector3 bridgePosition;
     private Vector3 bridgeLocalScale;
     private Vector3 bridgeEulerAngles;
     private bool bridgeState;
+
     // Camera and CameraHandler's thread variables 
     private Thread webcamThread;
     private bool webcamThreadRunning;
     private Camera mainCamera;
     private bool debugFlag;
-    Vector3 curNormalizedBridgeCenter;
-    //private float webcamRefreshRate = 0.017f;// 0.02 <=> 50hz // TODO make it customizable in options menu
-    float cameraMainOrthographicSize;
-    // webcamHandler variables 
-    Mat imgBGRMat, imgINMat;
-    Image<Hsv, byte> imgOUTBin;
-    Mat thresoldOUTFilter;
-    Mat structuringElement;
-    VectorOfVectorOfPoint contours;
-    VectorOfPoint biggestContour;
-    Mat hierarchy;
-    RotatedRect boundRec;
-    PointF[] boundRecPoints;
-    float curBridgeScreenSpacePorcentage;
-    float bridgeScreenSpacePorcentageAverage;
-    float curBridgeAngle;
-    float curBridgeXSize;
-    Vector3 normalizedBridgeCenterAverage;
+    private Vector3 curNormalizedBridgeCenter;
 
-    // Use this for initialization
+    private float cameraMainOrthographicSize;
+
+    // WebcamHandler variables
+    private Mat imgBGRMat, imgINMat;
+    private Image<Hsv, byte> imgOUTBin;
+    private Mat thresoldOUTFilter;
+    private Mat structuringElement;
+    private VectorOfVectorOfPoint contours;
+    private VectorOfPoint biggestContour;
+    private Mat hierarchy;
+    private RotatedRect boundRec;
+    private PointF[] boundRecPoints;
+    private float curBridgeScreenSpacePorcentage;
+    private float bridgeScreenSpacePorcentageAverage;
+    private float curBridgeAngle;
+    private float curBridgeXSize;
+    private Vector3 normalizedBridgeCenterAverage;
+
     void Awake()
     {
         // Capture from webcam
@@ -73,7 +75,7 @@ public class PlayerManager : MonoBehaviour
 
         bridgeMinimalArea = PlayerPrefs.GetFloat("bridgeMinimalArea", 0.001f);
         captureCyclesBuffer = PlayerPrefs.GetInt("captureCyclesBuffer", 5);
-        windowWidth = PlayerPrefs.GetInt("windowWidth", 640);	 // !!! CAMERA WINDOW !!! NOT ACTUAL SCREEN DIMENSIONS
+        windowWidth = PlayerPrefs.GetInt("windowWidth", 640); // !!! CAMERA WINDOW !!! NOT ACTUAL SCREEN DIMENSIONS
         windowHeight = PlayerPrefs.GetInt("windowHeight", 480);
 
         // Set output
@@ -106,7 +108,7 @@ public class PlayerManager : MonoBehaviour
         maxValueS = PlayerPrefs.GetFloat("maxValueS", 255);
         maxValueV = PlayerPrefs.GetFloat("maxValueV", 255);
 
-        // Set OpenCv inputs buffers
+        // Set OpenCV inputs buffers
         normalizedBridgeCenters = new OpenCVInputBuffer<Vector3>(captureCyclesBuffer);
         if (captureCyclesBuffer % 2 == 0) // MUST be an even number otherwise there'll be sign problem as we're averaging positive and negative values
             bridgeAngles = new OpenCVInputBuffer<float>(captureCyclesBuffer);
@@ -125,11 +127,8 @@ public class PlayerManager : MonoBehaviour
         cameraMainOrthographicSize = Camera.main.orthographicSize;
     }
 
-
-
     void OnDestroy()
     {
-        // We should probably use () but LoadScene() just triggers on the beginning of the next frame cycle while OnDestroy() triggers at the end .... What the heck unity ?
         webcamThreadRunning = false;
         webcam.Stop();
         webcam.Dispose();
@@ -139,7 +138,6 @@ public class PlayerManager : MonoBehaviour
         imgBGRMat = null;
         imgINMat = null;
     }
-
 
     void FixedUpdate()
     {
@@ -153,8 +151,6 @@ public class PlayerManager : MonoBehaviour
         else
             bridge.SetActive(false);
     }
-
-
 
     void WebcamHandler()
     {
@@ -207,7 +203,7 @@ public class PlayerManager : MonoBehaviour
                 boundRec = CvInvoke.MinAreaRect(biggestContour);
                 if (boundRec.Size.IsEmpty) // Just in case MinAreaRect fails ... It happens sometime ... Because why not
                 {
-                    bridgeState  = false;
+                    bridgeState = false;
                     continue;
                 }
                 boundRecPoints = boundRec.GetVertices();
@@ -218,14 +214,14 @@ public class PlayerManager : MonoBehaviour
                 curNormalizedBridgeCenter.z = bridgeZposition;
                 getCurNormalizedBridgeCenter();
                 // Insert position value
-                normalizedBridgeCenters.push_back(curNormalizedBridgeCenter);
+                normalizedBridgeCenters.PushBack(curNormalizedBridgeCenter);
 
                 // Draw Bounding Rectangle 
                 DrawPointsFRectangle(boundRecPoints, imgBGRMat);
 
                 // Draw Unity's rectangle (only if it is superior to bridgeMinimalArea)
                 curBridgeScreenSpacePorcentage = (boundRec.Size.Height / windowHeight) * (boundRec.Size.Width / windowWidth); // (0,1) porcentage of screen taken by the scanned object
-                bridgeScreenSpacePorcentages.push_back(curBridgeScreenSpacePorcentage);
+                bridgeScreenSpacePorcentages.PushBack(curBridgeScreenSpacePorcentage);
                 // Get birdge screen space average
                 bridgeScreenSpacePorcentageAverage = 0.0f;
                 foreach (float f in bridgeScreenSpacePorcentages.data)
@@ -244,9 +240,9 @@ public class PlayerManager : MonoBehaviour
                         curBridgeXSize = (boundRec.Size.Width / windowHeight) * (cameraMainOrthographicSize * 2.35f) * (Screen.width / Screen.height);
 
                     // Insert angle value
-                    bridgeAngles.push_back(curBridgeAngle);
+                    bridgeAngles.PushBack(curBridgeAngle);
                     // Insert bridge size value
-                    bridgeXSizes.push_back(curBridgeXSize);
+                    bridgeXSizes.PushBack(curBridgeXSize);
 
                     // !!! Get averages !!! 
                     // average position
@@ -289,38 +285,18 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-
-
     private IEnumerator getCurNormalizedBridgeCenter()
     {
         curNormalizedBridgeCenter = mainCamera.ScreenToWorldPoint(curNormalizedBridgeCenter);
         yield return null;
     }
 
-
-
-    Vector3 PointFToVec3(PointF pf, int desiredZ)
-	{
-		/***
-		 * brief : Convert "OpenCV pointf" to "Unity Vec3"
-		 */
-		Vector3 foo;
-		foo.x = pf.X;
-		foo.y = pf.Y;
-		foo.z = desiredZ;
-		return foo;
-	}
-
-
-
-	void DrawPointsFRectangle(PointF[] boundRecPoints, Mat output)
-	{
-		/***
-		 * brief : Draw Bounding Rectangle from the first 4 points of "boundRecPoints" onto "output"
-		 */
-		CvInvoke.Line(output, new Point((int) boundRecPoints[0].X, (int) boundRecPoints[0].Y), new Point((int) boundRecPoints[1].X, (int) boundRecPoints[1].Y), new MCvScalar (100, 0, 0), 3, (LineType)8, 0);
-		CvInvoke.Line(output, new Point((int) boundRecPoints[1].X, (int) boundRecPoints[1].Y), new Point((int) boundRecPoints[2].X, (int) boundRecPoints[2].Y), new MCvScalar (100, 0, 0), 3, (LineType)8, 0);
-		CvInvoke.Line(output, new Point((int) boundRecPoints[2].X, (int) boundRecPoints[2].Y), new Point((int) boundRecPoints[3].X, (int) boundRecPoints[3].Y), new MCvScalar (100, 0, 0), 3, (LineType)8, 0);
-		CvInvoke.Line(output, new Point((int) boundRecPoints[3].X, (int) boundRecPoints[3].Y), new Point((int) boundRecPoints[0].X, (int) boundRecPoints[0].Y), new MCvScalar (100, 0, 0), 3, (LineType)8, 0);
-	}
+    void DrawPointsFRectangle(PointF[] boundRecPoints, Mat output)
+    {
+        // Draw Bounding Rectangle from the first 4 points of "boundRecPoints" onto "output"
+        CvInvoke.Line(output, new Point((int)boundRecPoints[0].X, (int)boundRecPoints[0].Y), new Point((int)boundRecPoints[1].X, (int)boundRecPoints[1].Y), new MCvScalar(100, 0, 0), 3, (LineType)8, 0);
+        CvInvoke.Line(output, new Point((int)boundRecPoints[1].X, (int)boundRecPoints[1].Y), new Point((int)boundRecPoints[2].X, (int)boundRecPoints[2].Y), new MCvScalar(100, 0, 0), 3, (LineType)8, 0);
+        CvInvoke.Line(output, new Point((int)boundRecPoints[2].X, (int)boundRecPoints[2].Y), new Point((int)boundRecPoints[3].X, (int)boundRecPoints[3].Y), new MCvScalar(100, 0, 0), 3, (LineType)8, 0);
+        CvInvoke.Line(output, new Point((int)boundRecPoints[3].X, (int)boundRecPoints[3].Y), new Point((int)boundRecPoints[0].X, (int)boundRecPoints[0].Y), new MCvScalar(100, 0, 0), 3, (LineType)8, 0);
+    }
 }
