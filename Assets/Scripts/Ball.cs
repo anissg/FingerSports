@@ -39,9 +39,4 @@ public class Ball : MonoBehaviour
     {
         this.Scoring = false;
     }
-
-    private void Update()
-    {
-    }
-
 }

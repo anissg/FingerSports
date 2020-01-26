@@ -8,13 +8,12 @@ public class GameManager : MonoBehaviour
 {
     public int Minutes;
     public static int PlayerOneScore;
-    public TextMeshPro PlayerOneScoreLabel;
+    public TextMeshProUGUI PlayerOneScoreLabel;
     public static int PlayerTwoScore;
-    public TextMeshPro PlayerTwoScoreLabel;
+    public TextMeshProUGUI PlayerTwoScoreLabel;
     public float Seconds;
     public static bool Timeout;
-    public TextMeshPro TimerMinutesLabel;
-    public TextMeshPro TimerSecondsLabel;
+    public TextMeshProUGUI TimerLabel;
 
     // Methods
     private void Start()
@@ -46,8 +45,8 @@ public class GameManager : MonoBehaviour
         }
         PlayerOneScoreLabel.text = PlayerOneScore.ToString();
         PlayerTwoScoreLabel.text = PlayerTwoScore.ToString();
-        TimerMinutesLabel.text = Minutes < 10 ? $"0{Minutes}" : $"{Minutes}";
-        TimerSecondsLabel.text = Seconds < 10 ? $"0{Mathf.Floor(this.Seconds)}" : $"{Mathf.Floor(this.Seconds)}";
+        TimerLabel.text = (Minutes < 10 ? $"0{Minutes}" : $"{Minutes}") + ":" + 
+            (Seconds < 10 ? $"0{Mathf.Floor(this.Seconds)}" : $"{Mathf.Floor(this.Seconds)}");
     }
 
 }
