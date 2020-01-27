@@ -10607,6 +10607,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ef3990eb75bd746abb662e0872ad3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player1Config:
+    minValueH: 0
+    minValueS: 0
+    minValueV: 0
+    maxValueH: 0
+    maxValueS: 0
+    maxValueV: 0
+  Player2Config:
+    minValueH: 0
+    minValueS: 0
+    minValueV: 0
+    maxValueH: 0
+    maxValueS: 0
+    maxValueV: 0
+  windowWidth: 800
+  windowHeight: 600
+  playersMinimalArea: 0.01
+  captureCyclesBuffer: 3
+  player1: {fileID: 1841856452}
+  player2: {fileID: 778611766}
 --- !u!1 &1901767180
 GameObject:
   m_ObjectHideFlags: 0
