@@ -14,34 +14,41 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] [Range(0, 179)] private float minValueH, maxValueH;
-    [SerializeField] [Range(0, 255)] private float minValueS, minValueV, maxValueS, maxValueV;
-    [SerializeField] private PhysicMaterial bridgePhysicMaterial;
-    [SerializeField] private Material bridgeMaterial;
+    public DetectionConfig Player1Config;
+    public DetectionConfig Player2Config;
 
-    public static int windowWidth, windowHeight;
-    public static float bridgeMinimalArea; // RANGE(0.001f, 0.05f) 0.001f <=> 10‰ of screen space ; 0.05f <=> 5%
-    public static int captureCyclesBuffer; // RANGE(1, 20) Keep the last 10 values and average them to get proper / less jerky movements instead of using last frame results only
+    public int windowWidth, windowHeight;
+    // RANGE(0.001f, 0.05f) 0.001f <=> 10‰ of screen space ; 0.05f <=> 5%
+    public float playersMinimalArea;
+    // RANGE(1, 20) Keep the last 10 values and average them to get proper
+    // less jerky movements instead of using last frame results only
+    public int captureCyclesBuffer; 
+    public GameObject player1;
+    public GameObject player2;
+    private bool playersState;
 
-    private static VideoCapture webcam;
-    private static GameObject bridge;
-    private static float bridgeYSize = 1.0f;
-    private static float bridgeZSize = 1.0f;
-    private static float bridgeZposition = 1.0f;
-    private static Vector3 bottomLeftSreenInWorldSpace;
+    private VideoCapture webcam;
+    
+    private Vector3 bottomLeftSreenInWorldSpace;
 
     // OpenCV inputs variables
-    private static OpenCVInputBuffer<float> bridgeAngles;
-    private static OpenCVInputBuffer<Vector3> normalizedBridgeCenters; // (0,0) <=> Bottom Left, (1,1) <=> Top Right corner
-    private static OpenCVInputBuffer<float> bridgeXSizes;
-    private static OpenCVInputBuffer<float> bridgeScreenSpacePorcentages;
+    private InputBuffer<float> player1Angles;
+    private InputBuffer<float> player2Angles;
+    // (0,0) <=> Bottom Left, (1,1) <=> Top Right corner
+    private InputBuffer<Vector3> normalizedPlayer1Centers;
+    // (0,0) <=> Bottom Left, (1,1) <=> Top Right corner
+    private InputBuffer<Vector3> normalizedPlayer2Centers;
 
-    // fixedUpdate variables for bridge's movements
-    private Rigidbody bridgeRigidBody;
-    private Vector3 bridgePosition;
-    private Vector3 bridgeLocalScale;
-    private Vector3 bridgeEulerAngles;
-    private bool bridgeState;
+    private InputBuffer<float> player1ScreenSpacePorcentages;
+
+
+    // fixedUpdate variables for players movement
+    private Rigidbody player1RigidBody;
+    private Rigidbody player2RigidBody;
+    private Vector3 player1Position;
+    private Vector3 player2Position;
+    private Vector3 player1EulerAngles;
+    private Vector3 player2EulerAngles;
 
     // Camera and CameraHandler's thread variables 
     private Thread webcamThread;
@@ -65,7 +72,6 @@ public class PlayerManager : MonoBehaviour
     private float curBridgeScreenSpacePorcentage;
     private float bridgeScreenSpacePorcentageAverage;
     private float curBridgeAngle;
-    private float curBridgeXSize;
     private Vector3 normalizedBridgeCenterAverage;
 
     void Awake()
@@ -73,49 +79,75 @@ public class PlayerManager : MonoBehaviour
         // Capture from webcam
         webcam = new VideoCapture(0);
 
-        bridgeMinimalArea = PlayerPrefs.GetFloat("bridgeMinimalArea", 0.001f);
-        captureCyclesBuffer = PlayerPrefs.GetInt("captureCyclesBuffer", 5);
-        windowWidth = PlayerPrefs.GetInt("windowWidth", 640); // !!! CAMERA WINDOW !!! NOT ACTUAL SCREEN DIMENSIONS
-        windowHeight = PlayerPrefs.GetInt("windowHeight", 480);
+        playersMinimalArea = 0.01f; //todo add to config
+        captureCyclesBuffer = 3;
+        windowWidth = 640;
+        windowHeight = 480;
 
         // Set output
         if (Debug.isDebugBuild)
             CvInvoke.NamedWindow("BGR Output");
 
-        // Get bridge renderer
-        bridge = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        bridge.transform.name = "Bridge";
-        bridge.transform.parent = transform;
-        bridge.AddComponent<BoxCollider>();
-        bridgeRigidBody = bridge.AddComponent<Rigidbody>();
-        bridgeRigidBody.isKinematic = true;
-        bridgeRigidBody.collisionDetectionMode = CollisionDetectionMode.Continuous;
-        bridgeRigidBody.interpolation = RigidbodyInterpolation.Interpolate;
-        bridgeRigidBody.GetComponent<BoxCollider>().material = bridgePhysicMaterial;
-        bridgeRigidBody.isKinematic = true;
-        bridge.tag = "Bridge";
-        bridge.layer = LayerMask.NameToLayer("Bridge");
-        bridge.GetComponent<MeshRenderer>().material = bridgeMaterial;
-        bridge.GetComponent<BoxCollider>().material = bridgePhysicMaterial;
+
+        player1RigidBody = player1.AddComponent<Rigidbody>();
+        player2RigidBody = player2.AddComponent<Rigidbody>();
 
         // Get bottom left screen in world space coordinates
-        bottomLeftSreenInWorldSpace = new Vector3(0, 0, bridgeZposition);
+        //bottomLeftSreenInWorldSpace = new Vector3(0, 0, bridgeZposition);
 
-        minValueH = PlayerPrefs.GetFloat("minValueH", 70);
-        minValueS = PlayerPrefs.GetFloat("minValueS", 130);
-        minValueV = PlayerPrefs.GetFloat("minValueV", 55);
-        maxValueH = PlayerPrefs.GetFloat("maxValueH", 110);
-        maxValueS = PlayerPrefs.GetFloat("maxValueS", 255);
-        maxValueV = PlayerPrefs.GetFloat("maxValueV", 255);
+        DetectionConfig player1config;
+        if (PlayerPrefs.HasKey("player1conf"))
+        {
+            player1config = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player1conf"));
+        }
+        else
+        {
+            // load default values
+            player1config = new DetectionConfig()
+            {
+                minValueH = 50,//to do
+                minValueS = 50,
+                minValueV = 50,
+                maxValueH = 50,
+                maxValueS = 50,
+                maxValueV = 50
+            };
+        }
+
+        DetectionConfig player2config;
+        if (PlayerPrefs.HasKey("player2conf"))
+        {
+            player2config = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player2conf"));
+        }
+        else
+        {
+            // load default values
+            player2config = new DetectionConfig()
+            {
+                minValueH = 50,//to do
+                minValueS = 50,
+                minValueV = 50,
+                maxValueH = 50,
+                maxValueS = 50,
+                maxValueV = 50
+            };
+        }
 
         // Set OpenCV inputs buffers
-        normalizedBridgeCenters = new OpenCVInputBuffer<Vector3>(captureCyclesBuffer);
-        if (captureCyclesBuffer % 2 == 0) // MUST be an even number otherwise there'll be sign problem as we're averaging positive and negative values
-            bridgeAngles = new OpenCVInputBuffer<float>(captureCyclesBuffer);
+        normalizedPlayer1Centers = new InputBuffer<Vector3>(captureCyclesBuffer);
+        normalizedPlayer2Centers = new InputBuffer<Vector3>(captureCyclesBuffer);
+        // MUST be an even number otherwise there'll be sign problem as we're averaging positive and negative values
+        if (captureCyclesBuffer % 2 == 0)
+        {
+            player1Angles = new InputBuffer<float>(captureCyclesBuffer);
+            player2Angles = new InputBuffer<float>(captureCyclesBuffer);
+        }
         else
-            bridgeAngles = new OpenCVInputBuffer<float>(captureCyclesBuffer + 1);
-        bridgeXSizes = new OpenCVInputBuffer<float>(captureCyclesBuffer);
-        bridgeScreenSpacePorcentages = new OpenCVInputBuffer<float>(captureCyclesBuffer);
+        {
+            player1Angles = new InputBuffer<float>(captureCyclesBuffer + 1);
+            player2Angles = new InputBuffer<float>(captureCyclesBuffer + 1);
+        }
+        player1ScreenSpacePorcentages = new InputBuffer<float>(captureCyclesBuffer);
 
         // Starting WebcamHandler thread and its variables
         webcamThread = new System.Threading.Thread(WebcamHandler);
@@ -141,15 +173,17 @@ public class PlayerManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (webcamThreadRunning && bridgeState)
+        if (webcamThreadRunning && playersState)
         {
-            bridge.SetActive(true);
-            bridgeRigidBody.MovePosition(bridgePosition);
-            bridge.transform.localScale = bridgeLocalScale;
-            bridge.transform.eulerAngles = bridgeEulerAngles;
+            player1RigidBody.MovePosition(player1Position);
+            player1.transform.eulerAngles = player1EulerAngles;
+            player2RigidBody.MovePosition(player2Position);
+            player2.transform.eulerAngles = player2EulerAngles;
         }
         else
-            bridge.SetActive(false);
+        {
+            // reset positions and rotations
+        }
     }
 
     void WebcamHandler()
@@ -171,7 +205,9 @@ public class PlayerManager : MonoBehaviour
             // Applying thresold => getting binary filter => multiply it by input to get back color values
             imgOUTBin = imgINMat.ToImage<Hsv, byte>(); // Binary output
             thresoldOUTFilter = new Mat(); // Binary Filter
-            thresoldOUTFilter = imgOUTBin.InRange(new Hsv(minValueH, minValueS, minValueV), new Hsv(maxValueH, maxValueS, maxValueV)).Mat;
+            thresoldOUTFilter = imgOUTBin.InRange(
+                new Hsv( Player1Config.minValueH, Player1Config.minValueS, Player1Config.minValueV), 
+                new Hsv(Player1Config.maxValueH, Player1Config.maxValueS, Player1Config.maxValueV)).Mat;
 
             // Clearing Filter <=> Applying opening 
             int operationSize = 1;
@@ -203,7 +239,7 @@ public class PlayerManager : MonoBehaviour
                 boundRec = CvInvoke.MinAreaRect(biggestContour);
                 if (boundRec.Size.IsEmpty) // Just in case MinAreaRect fails ... It happens sometime ... Because why not
                 {
-                    bridgeState = false;
+                    playersState = false;
                     continue;
                 }
                 boundRecPoints = boundRec.GetVertices();
@@ -211,67 +247,56 @@ public class PlayerManager : MonoBehaviour
                 curNormalizedBridgeCenter.y = (1 - boundRec.Center.Y / windowWidth) * 25 - 15; //TODO : hardcoded values, change them
                 //curNormalizedBridgeCenter.x = (1 - boundRec.Center.X / windowWidth) * Screen.width;
                 //curNormalizedBridgeCenter.y = (1 - boundRec.Center.Y / windowHeight) * Screen.height;
-                curNormalizedBridgeCenter.z = bridgeZposition;
+                curNormalizedBridgeCenter.z = 0;
                 getCurNormalizedBridgeCenter();
                 // Insert position value
-                normalizedBridgeCenters.PushBack(curNormalizedBridgeCenter);
+                normalizedPlayer1Centers.PushBack(curNormalizedBridgeCenter);
 
                 // Draw Bounding Rectangle 
                 DrawPointsFRectangle(boundRecPoints, imgBGRMat);
 
                 // Draw Unity's rectangle (only if it is superior to bridgeMinimalArea)
                 curBridgeScreenSpacePorcentage = (boundRec.Size.Height / windowHeight) * (boundRec.Size.Width / windowWidth); // (0,1) porcentage of screen taken by the scanned object
-                bridgeScreenSpacePorcentages.PushBack(curBridgeScreenSpacePorcentage);
+                player1ScreenSpacePorcentages.PushBack(curBridgeScreenSpacePorcentage);
                 // Get birdge screen space average
                 bridgeScreenSpacePorcentageAverage = 0.0f;
-                foreach (float f in bridgeScreenSpacePorcentages.data)
+                foreach (float f in player1ScreenSpacePorcentages.data)
                     bridgeScreenSpacePorcentageAverage += f;
-                bridgeScreenSpacePorcentageAverage /= bridgeScreenSpacePorcentages.curLength;
-                if (bridgeScreenSpacePorcentageAverage > bridgeMinimalArea)
+                bridgeScreenSpacePorcentageAverage /= player1ScreenSpacePorcentages.curLength;
+                if (bridgeScreenSpacePorcentageAverage > playersMinimalArea)
                 {
                     // Get useful values
                     curBridgeAngle = boundRec.Angle;
                     if (boundRec.Size.Width < boundRec.Size.Height)
                     {
                         curBridgeAngle = 90 + curBridgeAngle;
-                        curBridgeXSize = (boundRec.Size.Height / windowHeight) * (cameraMainOrthographicSize * 2.35f) * (Screen.width / Screen.height); // TODO (low priority) : totally hacked value for 16/9 ratio screenss, fix it 
                     }
-                    else
-                        curBridgeXSize = (boundRec.Size.Width / windowHeight) * (cameraMainOrthographicSize * 2.35f) * (Screen.width / Screen.height);
 
                     // Insert angle value
-                    bridgeAngles.PushBack(curBridgeAngle);
-                    // Insert bridge size value
-                    bridgeXSizes.PushBack(curBridgeXSize);
+                    player1Angles.PushBack(curBridgeAngle);
 
                     // !!! Get averages !!! 
                     // average position
                     normalizedBridgeCenterAverage = new Vector3();
-                    foreach (Vector3 v in normalizedBridgeCenters.data)
+                    foreach (Vector3 v in normalizedPlayer1Centers.data)
                         normalizedBridgeCenterAverage += v;
-                    normalizedBridgeCenterAverage /= normalizedBridgeCenters.curLength;
+                    normalizedBridgeCenterAverage /= normalizedPlayer1Centers.curLength;
                     // average angle
                     float angleAverage = 0.0f;
-                    foreach (float f in bridgeAngles.data)
+                    foreach (float f in player1Angles.data)
                         angleAverage += f;
-                    angleAverage /= bridgeAngles.curLength;
-                    // average bridge size
-                    float bridgeXSizeAverage = 0.0f;
-                    foreach (float f in bridgeXSizes.data)
-                        bridgeXSizeAverage += f;
-                    bridgeXSizeAverage /= bridgeXSizes.curLength;
+                    angleAverage /= player1Angles.curLength;
 
                     // !!! Setting bridge values !!!
-                    bridgeState = true;
-                    bridgePosition = new Vector3(bottomLeftSreenInWorldSpace.x + normalizedBridgeCenterAverage.x, bottomLeftSreenInWorldSpace.y + normalizedBridgeCenterAverage.y, bridgeZposition);
-                    bridgeLocalScale = new Vector3(bridgeXSizeAverage, bridgeYSize, bridgeZSize);
-                    bridgeEulerAngles = new Vector3(0, 0, curBridgeAngle);
+                    playersState = true;
+                    player1Position = new Vector3(bottomLeftSreenInWorldSpace.x + normalizedBridgeCenterAverage.x, bottomLeftSreenInWorldSpace.y + normalizedBridgeCenterAverage.y, 0);
+                    player1EulerAngles = new Vector3(0, 0, curBridgeAngle);
                 }
                 else
-                    bridgeState = false;
+                    playersState = false;
             }
             else
-                bridgeState = false;
+                playersState = false;
             /************************************************/
 
             /*** Debug Display ***/

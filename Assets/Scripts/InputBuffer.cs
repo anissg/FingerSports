@@ -1,10 +1,10 @@
-﻿public class OpenCVInputBuffer<T>
+﻿public class InputBuffer<T>
 {
     public int maxSize;
     public int curLength;
     public T[] data;
 
-    public OpenCVInputBuffer(int size)
+    public InputBuffer(int size)
     {
         maxSize = size;
         curLength = 0;

@@ -179,6 +179,29 @@ public class Settings : MonoBehaviour
     void ButtonSubmit()
     {
         // Recuperer les valeurs Hmin, Hmax, Smin, Smax, Vmin, Vmax pour les deux joueurs
+
+        DetectionConfig player1conf = new DetectionConfig()
+        {
+            minValueH = player1HMin,
+            minValueS = player1SMin,
+            minValueV = player1VMin,
+            maxValueH = player1HMax,
+            maxValueS = player1SMax,
+            maxValueV = player1VMax
+        };
+        PlayerPrefs.SetString("player1conf", JsonUtility.ToJson(player1conf));
+
+        DetectionConfig player2conf = new DetectionConfig()
+        {
+            minValueH = player2HMin,
+            minValueS = player2SMin,
+            minValueV = player2VMin,
+            maxValueH = player2HMax,
+            maxValueS = player2SMax,
+            maxValueV = player2VMax
+        };
+        PlayerPrefs.SetString("player2conf", JsonUtility.ToJson(player2conf));
+
         menuManager.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }
