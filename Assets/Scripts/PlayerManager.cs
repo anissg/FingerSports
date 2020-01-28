@@ -14,8 +14,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public DetectionConfig Player1Config;
-    public DetectionConfig Player2Config;
+    public DetectionConfig player1Config;
+    public DetectionConfig player2Config;
 
     public int windowWidth, windowHeight;
     // RANGE(0.001f, 0.05f) 0.001f <=> 10‰ of screen space ; 0.05f <=> 5%
@@ -43,8 +43,8 @@ public class PlayerManager : MonoBehaviour
 
 
     // fixedUpdate variables for players movement
-    private Rigidbody player1RigidBody;
-    private Rigidbody player2RigidBody;
+    private Rigidbody2D player1RigidBody;
+    private Rigidbody2D player2RigidBody;
     private Vector3 player1Position;
     private Vector3 player2Position;
     private Vector3 player1EulerAngles;
@@ -89,21 +89,20 @@ public class PlayerManager : MonoBehaviour
             CvInvoke.NamedWindow("BGR Output");
 
 
-        player1RigidBody = player1.AddComponent<Rigidbody>();
-        player2RigidBody = player2.AddComponent<Rigidbody>();
+        player1RigidBody = player1.GetComponent<Rigidbody2D>();
+        player2RigidBody = player2.GetComponent<Rigidbody2D>();
 
         // Get bottom left screen in world space coordinates
         //bottomLeftSreenInWorldSpace = new Vector3(0, 0, bridgeZposition);
 
-        DetectionConfig player1config;
         if (PlayerPrefs.HasKey("player1conf"))
         {
-            player1config = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player1conf"));
+            player1Config = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player1conf"));
         }
         else
         {
             // load default values
-            player1config = new DetectionConfig()
+            player1Config = new DetectionConfig()
             {
                 minValueH = 50,//to do
                 minValueS = 50,
@@ -114,15 +113,14 @@ public class PlayerManager : MonoBehaviour
             };
         }
 
-        DetectionConfig player2config;
         if (PlayerPrefs.HasKey("player2conf"))
         {
-            player2config = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player2conf"));
+            player2Config = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player2conf"));
         }
         else
         {
             // load default values
-            player2config = new DetectionConfig()
+            player2Config = new DetectionConfig()
             {
                 minValueH = 50,//to do
                 minValueS = 50,
@@ -173,6 +171,9 @@ public class PlayerManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector2 dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        player1RigidBody.velocity = dir * 10;
+
         if (webcamThreadRunning && playersState)
         {
             player1RigidBody.MovePosition(player1Position);
@@ -206,8 +207,8 @@ public class PlayerManager : MonoBehaviour
             imgOUTBin = imgINMat.ToImage<Hsv, byte>(); // Binary output
             thresoldOUTFilter = new Mat(); // Binary Filter
             thresoldOUTFilter = imgOUTBin.InRange(
-                new Hsv( Player1Config.minValueH, Player1Config.minValueS, Player1Config.minValueV), 
-                new Hsv(Player1Config.maxValueH, Player1Config.maxValueS, Player1Config.maxValueV)).Mat;
+                new Hsv( player1Config.minValueH, player1Config.minValueS, player1Config.minValueV), 
+                new Hsv(player1Config.maxValueH, player1Config.maxValueS, player1Config.maxValueV)).Mat;
 
             // Clearing Filter <=> Applying opening 
             int operationSize = 1;

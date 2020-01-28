@@ -25,9 +25,9 @@ public class BasketRopePhysics : MonoBehaviour
         {
             Vector3[] positions =
             {
-                FirstAnchor.position + new Vector3(0f, 0f, -1f), 
-                transform.position + new Vector3(0f, 0f, -1f), 
-                SecondAnchor.position + new Vector3(0f, 0f, -1f)
+                FirstAnchor.position, 
+                transform.position, 
+                SecondAnchor.position
             };
             LineRenderer.SetPositions(positions);
         }
@@ -35,8 +35,8 @@ public class BasketRopePhysics : MonoBehaviour
         {
             Vector3[] vectorArray2 =
             {
-                FirstAnchor.position + new Vector3(0f, 0f, -1f),
-                transform.position + new Vector3(0f, 0f, -1f)
+                FirstAnchor.position,
+                transform.position
             };
             LineRenderer.SetPositions(vectorArray2);
         }
