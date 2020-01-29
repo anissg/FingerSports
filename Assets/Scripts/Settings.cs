@@ -14,9 +14,9 @@ using Emgu.CV.Structure;
 public class Settings : MonoBehaviour
 {
     [SerializeField] private MenuManager menuManager;
-    [SerializeField] private UnityEngine.UI.Slider player1SliderH, player1SliderS, player1SliderV;
+    [SerializeField] private UnityEngine.UI.Slider player1SliderHmin, player1SliderSmin, player1SliderVmin, player1SliderHmax, player1SliderSmax, player1SliderVmax;
     [SerializeField] private UnityEngine.UI.Slider player2SliderH, player2SliderS, player2SliderV;
-    [SerializeField] private UnityEngine.UI.Text player1TextH, player1TextS, player1TextV;
+    [SerializeField] private UnityEngine.UI.Text player1TextHmin, player1TextSmin, player1TextVmin, player1TextHmax, player1TextSmax, player1TextVmax;
     [SerializeField] private UnityEngine.UI.Text player2TextH, player2TextS, player2TextV;
     [SerializeField] private UnityEngine.UI.Image player1Camera;
     [SerializeField] private UnityEngine.UI.Image player2Camera;
@@ -39,12 +39,35 @@ public class Settings : MonoBehaviour
         player1Texture = new Texture2D(videoCapture.Width, videoCapture.Height, TextureFormat.BGRA32, false);
         player2Texture = new Texture2D(videoCapture.Width, videoCapture.Height, TextureFormat.BGRA32, false);
 
-        player1SliderH.onValueChanged.AddListener(delegate { Player1HvalueChange(); });
-        player1SliderS.onValueChanged.AddListener(delegate { Player1SvalueChange(); });
-        player1SliderV.onValueChanged.AddListener(delegate { Player1VvalueChange(); });
+        player1SliderHmin.onValueChanged.AddListener(delegate { Player1HminValueChange(); });
+        player1SliderSmin.onValueChanged.AddListener(delegate { Player1SminValueChange(); });
+        player1SliderVmin.onValueChanged.AddListener(delegate { Player1VminValueChange(); });
+        player1SliderHmax.onValueChanged.AddListener(delegate { Player1HmaxValueChange(); });
+        player1SliderSmax.onValueChanged.AddListener(delegate { Player1SmaxValueChange(); });
+        player1SliderVmax.onValueChanged.AddListener(delegate { Player1VmaxValueChange(); });
+
         player2SliderH.onValueChanged.AddListener(delegate { Player2HvalueChange(); });
         player2SliderS.onValueChanged.AddListener(delegate { Player2SvalueChange(); });
         player2SliderV.onValueChanged.AddListener(delegate { Player2VvalueChange(); });
+
+        if (PlayerPrefs.HasKey("player1conf"))
+        {
+            DetectionConfig player1conf = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player1conf"));
+            player1SliderHmax.value = player1conf.maxValueH;
+            player1SliderSmax.value = player1conf.maxValueS;
+            player1SliderVmax.value = player1conf.maxValueV;
+            player1SliderHmin.value = player1conf.minValueH;
+            player1SliderSmin.value = player1conf.minValueS;
+            player1SliderVmin.value = player1conf.minValueV;
+        }
+
+        if (PlayerPrefs.HasKey("player2conf"))
+        {
+            DetectionConfig player2conf = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player2conf"));
+            player2SliderH.value = (player2conf.maxValueH + player2conf.minValueH) / 2;
+            player2SliderS.value = (player2conf.maxValueS + player2conf.minValueS) / 2;
+            player2SliderV.value = (player2conf.maxValueV + player2conf.minValueV) / 2;
+        }
 
         buttonSubmit.onClick.AddListener(ButtonSubmit);
     }
@@ -58,9 +81,13 @@ public class Settings : MonoBehaviour
     void imageGrabbed(object sender, EventArgs e)
     {
         // Sliders
-        player1TextH.text = player1SliderH.value.ToString();
-        player1TextS.text = player1SliderS.value.ToString();
-        player1TextV.text = player1SliderV.value.ToString();
+        player1TextHmin.text = player1SliderHmin.value.ToString();
+        player1TextSmin.text = player1SliderSmin.value.ToString();
+        player1TextVmin.text = player1SliderVmin.value.ToString();
+        player1TextHmax.text = player1SliderHmax.value.ToString();
+        player1TextSmax.text = player1SliderSmax.value.ToString();
+        player1TextVmax.text = player1SliderVmax.value.ToString();
+        
         player2TextH.text = player2SliderH.value.ToString();
         player2TextS.text = player2SliderS.value.ToString();
         player2TextV.text = player2SliderV.value.ToString();
@@ -72,6 +99,7 @@ public class Settings : MonoBehaviour
         // HSV image
         Mat imgHSV = image.Clone();
         CvInvoke.CvtColor(image, imgHSV, ColorConversion.Bgr2Hsv);
+        CvInvoke.GaussianBlur(imgHSV, imgHSV, new Size(25, 25), 0);
 
         // Blur image
         Mat blurHSV = imgHSV.Clone();
@@ -208,23 +236,37 @@ public class Settings : MonoBehaviour
 
     // Sliders callback
 
-    void Player1HvalueChange()
+    void Player1HminValueChange()
     {
-        player1HMin = (int)player1SliderH.value - 10;
-        player1HMax = (int)player1SliderH.value + 10;
+        player1HMin = (int)player1SliderHmin.value;
     }
 
-    void Player1SvalueChange()
+    void Player1SminValueChange()
     {
-        player1SMin = (int)player1SliderS.value - 25;
-        player1SMax = (int)player1SliderS.value + 25;
+        player1SMin = (int)player1SliderSmin.value;
     }
 
-    void Player1VvalueChange()
+    void Player1VminValueChange()
     {
-        player1VMin = (int)player1SliderV.value - 40;
-        player1VMax = (int)player1SliderV.value + 40;
+        player1VMin = (int)player1SliderVmin.value;
     }
+    void Player1HmaxValueChange()
+    {
+        player1HMax = (int)player1SliderHmax.value;
+    }
+
+    void Player1SmaxValueChange()
+    {
+        player1SMax = (int)player1SliderSmax.value;
+    }
+
+    void Player1VmaxValueChange()
+    {
+        player1VMax = (int)player1SliderVmax.value;
+    }
+
+
+
 
     void Player2HvalueChange()
     {
@@ -234,13 +276,13 @@ public class Settings : MonoBehaviour
 
     void Player2SvalueChange()
     {
-        player2SMin = (int)player2SliderS.value - 25;
-        player2SMax = (int)player2SliderS.value + 25;
+        player2SMin = (int)player2SliderS.value - 50;
+        player2SMax = (int)player2SliderS.value + 50;
     }
 
     void Player2VvalueChange()
     {
-        player2VMin = (int)player2SliderV.value - 40;
-        player2VMax = (int)player2SliderV.value + 40;
+        player2VMin = (int)player2SliderV.value - 50;
+        player2VMax = (int)player2SliderV.value + 50;
     }
 }

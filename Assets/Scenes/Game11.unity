@@ -293,7 +293,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.24800014
+  m_Distance: 0.2975998
   m_MaxDistanceOnly: 0
 --- !u!232 &33535855
 DistanceJoint2D:
@@ -312,7 +312,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25547585
+  m_Distance: 0.30657116
   m_MaxDistanceOnly: 0
 --- !u!58 &33535856
 CircleCollider2D:
@@ -559,7 +559,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.27868426
+  m_Distance: 0.3344213
   m_MaxDistanceOnly: 0
 --- !u!58 &70300634
 CircleCollider2D:
@@ -665,7 +665,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.26100016
+  m_Distance: 0.3132
   m_MaxDistanceOnly: 0
 --- !u!1 &164666162
 GameObject:
@@ -839,7 +839,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25
+  m_Distance: 0.2999997
   m_MaxDistanceOnly: 0
 --- !u!232 &164666167
 DistanceJoint2D:
@@ -858,7 +858,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.19131662
+  m_Distance: 0.22957991
   m_MaxDistanceOnly: 0
 --- !u!58 &164666168
 CircleCollider2D:
@@ -1112,7 +1112,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25
+  m_Distance: 0.3000002
   m_MaxDistanceOnly: 0
 --- !u!232 &183667927
 DistanceJoint2D:
@@ -1131,7 +1131,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.1926293
+  m_Distance: 0.23115511
   m_MaxDistanceOnly: 0
 --- !u!58 &183667928
 CircleCollider2D:
@@ -1467,7 +1467,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.19215108
+  m_Distance: 0.23058134
   m_MaxDistanceOnly: 0
 --- !u!58 &201866549
 CircleCollider2D:
@@ -1721,7 +1721,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.24800014
+  m_Distance: 0.2975998
   m_MaxDistanceOnly: 0
 --- !u!232 &346128219
 DistanceJoint2D:
@@ -1740,7 +1740,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25547585
+  m_Distance: 0.3065714
   m_MaxDistanceOnly: 0
 --- !u!58 &346128220
 CircleCollider2D:
@@ -1982,7 +1982,7 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 6.099, y: 1.825}
+  m_ConnectedAnchor: {x: 5.8688, y: 2.2340002}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!58 &347811144
@@ -2309,7 +2309,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.24399996
+  m_Distance: 0.29279995
   m_MaxDistanceOnly: 0
 --- !u!58 &405446432
 CircleCollider2D:
@@ -2562,7 +2562,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.24399996
+  m_Distance: 0.29279995
   m_MaxDistanceOnly: 0
 --- !u!58 &473282689
 CircleCollider2D:
@@ -2867,7 +2867,7 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -6.7720003, y: 1.7249999}
+  m_ConnectedAnchor: {x: -6.6264, y: 2.224}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!1 &617505300
@@ -2935,8 +2935,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 1684232703
-  m_fontColor: {r: 1, g: 0.34901962, b: 0.3882353, a: 0.39215687}
+    rgba: 1692576553
+  m_fontColor: {r: 0.16078432, g: 0.67058825, b: 0.8862745, a: 0.39215687}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3074,7 +3074,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.2
+  m_Mass: 0.05
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -3141,7 +3141,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635390828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.33, y: 1.15, z: 0}
+  m_LocalPosition: {x: 0, y: 1.15, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3323,7 +3323,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.24399996
+  m_Distance: 0.29279995
   m_MaxDistanceOnly: 0
 --- !u!58 &635574658
 CircleCollider2D:
@@ -3468,7 +3468,7 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 6.434, y: 1.825}
+  m_ConnectedAnchor: {x: 6.2708, y: 2.2340002}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!58 &752750559
@@ -3688,7 +3688,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 50
+  m_Mass: 20
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -3755,7 +3755,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778611766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.28, y: -2, z: 0}
+  m_LocalPosition: {x: -3.33, y: -2, z: 0}
   m_LocalScale: {x: -0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 918180943}
@@ -3934,7 +3934,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25
+  m_Distance: 0.3000002
   m_MaxDistanceOnly: 0
 --- !u!232 &828414445
 DistanceJoint2D:
@@ -3953,7 +3953,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.20599997
+  m_Distance: 0.2471999
   m_MaxDistanceOnly: 0
 --- !u!58 &828414446
 CircleCollider2D:
@@ -4254,7 +4254,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.26100016
+  m_Distance: 0.3132
   m_MaxDistanceOnly: 0
 --- !u!232 &874821630
 DistanceJoint2D:
@@ -4273,7 +4273,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.27868426
+  m_Distance: 0.33442152
   m_MaxDistanceOnly: 0
 --- !u!58 &874821631
 CircleCollider2D:
@@ -4519,7 +4519,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.24399996
+  m_Distance: 0.29279995
   m_MaxDistanceOnly: 0
 --- !u!58 &887698404
 CircleCollider2D:
@@ -4780,7 +4780,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.22300005
+  m_Distance: 0.26760006
   m_MaxDistanceOnly: 0
 --- !u!232 &889978472
 DistanceJoint2D:
@@ -4799,7 +4799,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.20599997
+  m_Distance: 0.2471999
   m_MaxDistanceOnly: 0
 --- !u!58 &889978473
 CircleCollider2D:
@@ -5147,7 +5147,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25
+  m_Distance: 0.2999997
   m_MaxDistanceOnly: 0
 --- !u!232 &1033810890
 DistanceJoint2D:
@@ -5166,7 +5166,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.20599997
+  m_Distance: 0.2471999
   m_MaxDistanceOnly: 0
 --- !u!58 &1033810891
 CircleCollider2D:
@@ -5467,7 +5467,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.22300005
+  m_Distance: 0.26760006
   m_MaxDistanceOnly: 0
 --- !u!232 &1061972709
 DistanceJoint2D:
@@ -5486,7 +5486,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.19151251
+  m_Distance: 0.229815
   m_MaxDistanceOnly: 0
 --- !u!58 &1061972710
 CircleCollider2D:
@@ -5732,7 +5732,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.24399996
+  m_Distance: 0.29279995
   m_MaxDistanceOnly: 0
 --- !u!58 &1139566470
 CircleCollider2D:
@@ -5877,7 +5877,7 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 5.7650003, y: 1.825}
+  m_ConnectedAnchor: {x: 5.468, y: 2.2340002}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!58 &1160948261
@@ -6131,7 +6131,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.20599997
+  m_Distance: 0.2471999
   m_MaxDistanceOnly: 0
 --- !u!58 &1183534858
 CircleCollider2D:
@@ -6385,7 +6385,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25999975
+  m_Distance: 0.31200027
   m_MaxDistanceOnly: 0
 --- !u!232 &1191982566
 DistanceJoint2D:
@@ -6404,7 +6404,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.2559862
+  m_Distance: 0.30718368
   m_MaxDistanceOnly: 0
 --- !u!58 &1191982567
 CircleCollider2D:
@@ -6894,7 +6894,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25
+  m_Distance: 0.3000002
   m_MaxDistanceOnly: 0
 --- !u!232 &1380013370
 DistanceJoint2D:
@@ -6913,7 +6913,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.20599997
+  m_Distance: 0.2471999
   m_MaxDistanceOnly: 0
 --- !u!58 &1380013371
 CircleCollider2D:
@@ -7167,7 +7167,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25
+  m_Distance: 0.2999997
   m_MaxDistanceOnly: 0
 --- !u!232 &1389957804
 DistanceJoint2D:
@@ -7186,7 +7186,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.19131662
+  m_Distance: 0.22957991
   m_MaxDistanceOnly: 0
 --- !u!58 &1389957805
 CircleCollider2D:
@@ -7440,7 +7440,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.22300005
+  m_Distance: 0.26760006
   m_MaxDistanceOnly: 0
 --- !u!232 &1400526577
 DistanceJoint2D:
@@ -7459,7 +7459,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.19151251
+  m_Distance: 0.229815
   m_MaxDistanceOnly: 0
 --- !u!58 &1400526578
 CircleCollider2D:
@@ -7606,8 +7606,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 1692576553
-  m_fontColor: {r: 0.16078432, g: 0.67058825, b: 0.8862745, a: 0.39215687}
+    rgba: 1684232703
+  m_fontColor: {r: 1, g: 0.34901962, b: 0.3882353, a: 0.39215687}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7908,7 +7908,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.24399996
+  m_Distance: 0.29279995
   m_MaxDistanceOnly: 0
 --- !u!58 &1455194807
 CircleCollider2D:
@@ -8168,7 +8168,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.19215108
+  m_Distance: 0.23058134
   m_MaxDistanceOnly: 0
 --- !u!58 &1489465209
 CircleCollider2D:
@@ -8306,7 +8306,7 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 6.7720003, y: 1.825}
+  m_ConnectedAnchor: {x: 6.6764, y: 2.2340002}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!58 &1530237734
@@ -8561,7 +8561,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.22300005
+  m_Distance: 0.26760006
   m_MaxDistanceOnly: 0
 --- !u!232 &1542990243
 DistanceJoint2D:
@@ -8580,7 +8580,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.20599997
+  m_Distance: 0.2471999
   m_MaxDistanceOnly: 0
 --- !u!58 &1542990244
 CircleCollider2D:
@@ -8876,7 +8876,7 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -6.434, y: 1.7249999}
+  m_ConnectedAnchor: {x: -6.2208, y: 2.224}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!58 &1566570712
@@ -9130,7 +9130,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.27868426
+  m_Distance: 0.33442134
   m_MaxDistanceOnly: 0
 --- !u!58 &1616950768
 CircleCollider2D:
@@ -9290,8 +9290,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1701686852}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.8, y: 2.28, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -6.66, y: 2.89, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 575701659}
   - {fileID: 1566570714}
@@ -9555,7 +9555,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25
+  m_Distance: 0.3000002
   m_MaxDistanceOnly: 0
 --- !u!232 &1796518720
 DistanceJoint2D:
@@ -9574,7 +9574,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.1926293
+  m_Distance: 0.23115511
   m_MaxDistanceOnly: 0
 --- !u!58 &1796518721
 CircleCollider2D:
@@ -9827,7 +9827,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.20599997
+  m_Distance: 0.2471999
   m_MaxDistanceOnly: 0
 --- !u!58 &1805725569
 CircleCollider2D:
@@ -9991,7 +9991,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841856452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.27, y: -2, z: 0}
+  m_LocalPosition: {x: 3.35, y: -2, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 933884292}
@@ -10111,7 +10111,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 50
+  m_Mass: 20
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -10263,8 +10263,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1846272908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.8, y: 2.38, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalPosition: {x: 6.71, y: 2.9, z: 0}
+  m_LocalScale: {x: -1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 1530237736}
   - {fileID: 752750561}
@@ -10463,7 +10463,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25
+  m_Distance: 0.2999997
   m_MaxDistanceOnly: 0
 --- !u!232 &1880125891
 DistanceJoint2D:
@@ -10482,7 +10482,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.20599997
+  m_Distance: 0.2471999
   m_MaxDistanceOnly: 0
 --- !u!58 &1880125892
 CircleCollider2D:
@@ -10607,26 +10607,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ef3990eb75bd746abb662e0872ad3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1Config:
-    minValueH: 0
-    minValueS: 0
-    minValueV: 0
-    maxValueH: 0
-    maxValueS: 0
-    maxValueV: 0
-  player2Config:
-    minValueH: 0
-    minValueS: 0
-    minValueV: 0
-    maxValueH: 0
-    maxValueS: 0
-    maxValueV: 0
-  windowWidth: 800
-  windowHeight: 600
-  playersMinimalArea: 0.01
-  captureCyclesBuffer: 3
   player1: {fileID: 1841856452}
   player2: {fileID: 778611766}
+  captureCyclesBuffer: 3
+  playersMinimalArea: 0.001
 --- !u!1 &1901767180
 GameObject:
   m_ObjectHideFlags: 0
@@ -10683,7 +10667,7 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -6.099, y: 1.7249999}
+  m_ConnectedAnchor: {x: -5.8188, y: 2.224}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!58 &1901767183
@@ -10978,7 +10962,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.24399996
+  m_Distance: 0.29279995
   m_MaxDistanceOnly: 0
 --- !u!58 &1918380765
 CircleCollider2D:
@@ -11344,7 +11328,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.27868426
+  m_Distance: 0.33442113
   m_MaxDistanceOnly: 0
 --- !u!58 &2046375840
 CircleCollider2D:
@@ -11569,7 +11553,7 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -5.7650003, y: 1.7249999}
+  m_ConnectedAnchor: {x: -5.4179997, y: 2.224}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!1 &2071518702
@@ -11736,7 +11720,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.24399996
+  m_Distance: 0.29279995
   m_MaxDistanceOnly: 0
 --- !u!58 &2071518707
 CircleCollider2D:
@@ -11997,7 +11981,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.25999975
+  m_Distance: 0.31200027
   m_MaxDistanceOnly: 0
 --- !u!232 &2105800597
 DistanceJoint2D:
@@ -12016,7 +12000,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.2559862
+  m_Distance: 0.30718344
   m_MaxDistanceOnly: 0
 --- !u!58 &2105800598
 CircleCollider2D:
