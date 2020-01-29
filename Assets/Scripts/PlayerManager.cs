@@ -104,12 +104,12 @@ public class PlayerManager : MonoBehaviour
             // load default values
             player1Config = new DetectionConfig()
             {
-                minValueH = 50,//to do
-                minValueS = 50,
-                minValueV = 50,
-                maxValueH = 50,
-                maxValueS = 50,
-                maxValueV = 50
+                minValueH = 9-10,//to do
+                minValueS = 182-25,
+                minValueV = 189-40,
+                maxValueH = 9+10,
+                maxValueS = 182+25,
+                maxValueV = 189+40
             };
         }
 
@@ -122,12 +122,12 @@ public class PlayerManager : MonoBehaviour
             // load default values
             player2Config = new DetectionConfig()
             {
-                minValueH = 50,//to do
-                minValueS = 50,
-                minValueV = 50,
-                maxValueH = 50,
-                maxValueS = 50,
-                maxValueV = 50
+                minValueH = 96 - 10,
+                minValueS = 164 - 25,
+                minValueV = 133 - 40,
+                maxValueH = 96 + 10,
+                maxValueS = 164 + 25,
+                maxValueV = 133 + 40
             };
         }
 
@@ -305,7 +305,7 @@ public class PlayerManager : MonoBehaviour
             {
                 CvInvoke.Flip(imgBGRMat, imgBGRMat, FlipType.Horizontal); // Flip picture
                 CvInvoke.CvtColor(imgBGRMat, imgBGRMat, ColorConversion.Hsv2Bgr);
-                CvInvoke.Imshow("BGR Output", imgBGRMat); // !!! BY DEFAULT USE BGR COLORSPACE !!!
+                // CvInvoke.Imshow("BGR Output", imgBGRMat); // !!! BY DEFAULT USE BGR COLORSPACE !!!
                 /*** CvInvoke.Resize(imgBGRMat, imgBGRMat, new Size(windowWidth, windowHeight)); ***/ // DO NOT USE UNTIL windowWidth and windowHeight is fixed and used
             }
         }
