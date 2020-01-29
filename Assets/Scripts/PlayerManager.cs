@@ -85,8 +85,8 @@ public class PlayerManager : MonoBehaviour
         windowHeight = 480;
 
         // Set output
-        if (Debug.isDebugBuild)
-            CvInvoke.NamedWindow("BGR Output");
+        //if (Debug.isDebugBuild)
+        //    CvInvoke.NamedWindow("BGR Output");
 
 
         player1RigidBody = player1.GetComponent<Rigidbody2D>();
@@ -209,6 +209,8 @@ public class PlayerManager : MonoBehaviour
             thresoldOUTFilter = imgOUTBin.InRange(
                 new Hsv( player1Config.minValueH, player1Config.minValueS, player1Config.minValueV), 
                 new Hsv(player1Config.maxValueH, player1Config.maxValueS, player1Config.maxValueV)).Mat;
+
+            CvInvoke.Imshow("filter", imgBGRMat);
 
             // Clearing Filter <=> Applying opening 
             int operationSize = 1;
