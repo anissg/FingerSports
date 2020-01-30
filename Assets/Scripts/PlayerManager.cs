@@ -67,7 +67,7 @@ public class PlayerManager : MonoBehaviour
         //webcam.FlipVertical = true;
         CvInvoke.CheckLibraryLoaded();
 
-        playersMinimalArea = 0.01f; //todo add to config
+        playersMinimalArea = 0.001f;
         captureCyclesBuffer = 5;
         windowWidth = 640;
         windowHeight = 480;
