@@ -53,27 +53,7 @@ public class Settings : MonoBehaviour
         player2SliderSmax.onValueChanged.AddListener(delegate { Player2SmaxValueChange(); });
         player2SliderVmax.onValueChanged.AddListener(delegate { Player2VmaxValueChange(); });
 
-        if (PlayerPrefs.HasKey("player1conf"))
-        {
-            DetectionConfig player1conf = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player1conf"));
-            player1SliderHmax.value = player1conf.maxValueH;
-            player1SliderSmax.value = player1conf.maxValueS;
-            player1SliderVmax.value = player1conf.maxValueV;
-            player1SliderHmin.value = player1conf.minValueH;
-            player1SliderSmin.value = player1conf.minValueS;
-            player1SliderVmin.value = player1conf.minValueV;
-        }
-
-        if (PlayerPrefs.HasKey("player2conf"))
-        {
-            DetectionConfig player2conf = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player2conf"));
-            player2SliderHmax.value = player2conf.maxValueH;
-            player2SliderSmax.value = player2conf.maxValueS;
-            player2SliderVmax.value = player2conf.maxValueV;
-            player2SliderHmin.value = player2conf.minValueH;
-            player2SliderSmin.value = player2conf.minValueS;
-            player2SliderVmin.value = player2conf.minValueV;
-        }
+        LoadPrefs();
 
         buttonSubmit.onClick.AddListener(ButtonSubmit);
         buttonCancel.onClick.AddListener(ButtonCancel);
@@ -82,11 +62,6 @@ public class Settings : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (videoCapture.IsOpened) videoCapture.Grab();
-    }
-
-    void imageGrabbed(object sender, EventArgs e)
     {
         // Sliders
         player1TextHmin.text = player1SliderHmin.value.ToString();
@@ -102,7 +77,12 @@ public class Settings : MonoBehaviour
         player2TextHmax.text = player2SliderHmax.value.ToString();
         player2TextSmax.text = player2SliderSmax.value.ToString();
         player2TextVmax.text = player2SliderVmax.value.ToString();
+        
+        if (videoCapture.IsOpened) videoCapture.Grab();
+    }
 
+    void imageGrabbed(object sender, EventArgs e)
+    {
         // Get video flux
         Mat image = new Mat();
         videoCapture.Retrieve(image);
@@ -265,6 +245,31 @@ public class Settings : MonoBehaviour
         player2SliderHmin.value = 0;
         player2SliderSmin.value = 0;
         player2SliderVmin.value = 0;
+    }
+
+    public void LoadPrefs()
+    {
+        if (PlayerPrefs.HasKey("player1conf"))
+        {
+            DetectionConfig player1conf = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player1conf"));
+            player1SliderHmax.value = player1conf.maxValueH;
+            player1SliderSmax.value = player1conf.maxValueS;
+            player1SliderVmax.value = player1conf.maxValueV;
+            player1SliderHmin.value = player1conf.minValueH;
+            player1SliderSmin.value = player1conf.minValueS;
+            player1SliderVmin.value = player1conf.minValueV;
+        }
+
+        if (PlayerPrefs.HasKey("player2conf"))
+        {
+            DetectionConfig player2conf = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player2conf"));
+            player2SliderHmax.value = player2conf.maxValueH;
+            player2SliderSmax.value = player2conf.maxValueS;
+            player2SliderVmax.value = player2conf.maxValueV;
+            player2SliderHmin.value = player2conf.minValueH;
+            player2SliderSmin.value = player2conf.minValueS;
+            player2SliderVmin.value = player2conf.minValueV;
+        }
     }
 
     // Sliders callback

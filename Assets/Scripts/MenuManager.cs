@@ -32,6 +32,7 @@ public class MenuManager : MonoBehaviour
     void ShowSettings()
     {
         settings.gameObject.SetActive(true);
+        settings.LoadPrefs();
         gameObject.SetActive(false);
     }
 
