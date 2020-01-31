@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private bool Scoring;
+    private bool Scoring = false;
+    private bool BottomScring = false;
 
     // Methods
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name.Contains("ScoringColliderTop"))
         {
-            this.Scoring = true;
+            Scoring = true;
         }
         if (collision.gameObject.name.Contains("ScoringColliderBottom") && this.Scoring)
         {
-            if (base.transform.position.x > 0f)
-            {
-                GameManager.PlayerOneScore++;
+            if(!BottomScring)
+            { 
+                if (transform.position.x > 0f)
+                {
+                    GameManager.PlayerOneScore++;
+                }
+                else
+                {
+                    GameManager.PlayerTwoScore++;
+                }
+                Scoring = false;
             }
-            else
-            {
-                GameManager.PlayerTwoScore++;
-            }
-            this.Scoring = false;
+        }
+        if (collision.gameObject.name.Contains("ScoringColliderBottom") && !this.Scoring)
+        {
+            BottomScring = true;
         }
     }
 
@@ -31,12 +39,16 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.name.Contains("ScoringColliderTop"))
         {
-            this.Scoring = false;
+            Scoring = false;
+        }
+        if (collision.gameObject.name.Contains("ScoringColliderBottom"))
+        {
+            BottomScring = false;
         }
     }
 
     private void Start()
     {
-        this.Scoring = false;
+        Scoring = false;
     }
 }

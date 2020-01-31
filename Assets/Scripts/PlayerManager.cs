@@ -255,10 +255,6 @@ public class PlayerManager : MonoBehaviour
                         angleAverage += f;
                     angleAverage /= player1Angles.curLength;
 
-                    if(angleAverage < 0 && angleAverage > -90)
-
-                    Debug.Log(angleAverage);
-
                     // !!! Setting bridge values !!!
                     playersState = true;
                     player1Velocity = centerDiffAverage * 1f;
@@ -315,10 +311,6 @@ public class PlayerManager : MonoBehaviour
                         angleAverage += f;
                     angleAverage /= player2Angles.curLength;
 
-                    if (angleAverage < 0 && angleAverage > -90)
-
-                        Debug.Log(angleAverage);
-
                     // !!! Setting bridge values !!!
                     playersState = true;
                     player2Velocity = centerDiffAverage * 1f;
@@ -330,9 +322,9 @@ public class PlayerManager : MonoBehaviour
             //Debug Display
             if (debugFlag)
             {
-                CvInvoke.Imshow("cam", imgBGR);
-                CvInvoke.Imshow("p1", player1ThresholdOUT);
-                CvInvoke.Imshow("p2", player2ThresholdOUT);
+                //CvInvoke.Imshow("cam", imgBGR);
+                //CvInvoke.Imshow("p1", player1ThresholdOUT);
+                //CvInvoke.Imshow("p2", player2ThresholdOUT);
             }
         }
     }
