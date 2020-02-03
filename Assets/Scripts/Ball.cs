@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private bool Scoring = false;
-    private bool BottomScring = false;
+    private bool BottomScoring = false;
 
     // Methods
     private void OnTriggerEnter2D(Collider2D collision)
@@ -16,22 +16,22 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.name.Contains("ScoringColliderBottom") && this.Scoring)
         {
-            if(!BottomScring)
+            if(!BottomScoring)
             { 
                 if (transform.position.x > 0f)
                 {
-                    GameManager.PlayerOneScore++;
+                    GameManager.PlayerTwoScore++;
                 }
                 else
                 {
-                    GameManager.PlayerTwoScore++;
+                    GameManager.PlayerOneScore++;
                 }
                 Scoring = false;
             }
         }
         if (collision.gameObject.name.Contains("ScoringColliderBottom") && !this.Scoring)
         {
-            BottomScring = true;
+            BottomScoring = true;
         }
     }
 
@@ -43,7 +43,7 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.name.Contains("ScoringColliderBottom"))
         {
-            BottomScring = false;
+            BottomScoring = false;
         }
     }
 

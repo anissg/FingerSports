@@ -152,7 +152,7 @@ public class PlayerManager : MonoBehaviour
 
             // Isolate unity defined Color range 
             CvInvoke.CvtColor(imgIN, imgIN, ColorConversion.Bgr2Hsv); // Convert input to hsv
-            CvInvoke.GaussianBlur(imgIN, imgIN, new Size(25, 25), 0);
+            //CvInvoke.GaussianBlur(imgIN, imgIN, new Size(25, 25), 0);
 
             // Applying thresold => getting binary filter => multiply it by input to get back color values
             imgBIN = imgIN.ToImage<Hsv, byte>(); // Binary output

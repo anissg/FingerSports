@@ -5,22 +5,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using UnityEngine.UI;
 
 using Emgu.CV;
 using Emgu.CV.Util;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using TMPro;
 
 public class Settings : MonoBehaviour
 {
     [SerializeField] private MenuManager menuManager;
-    [SerializeField] private UnityEngine.UI.Slider player1SliderHmin, player1SliderSmin, player1SliderVmin, player1SliderHmax, player1SliderSmax, player1SliderVmax;
-    [SerializeField] private UnityEngine.UI.Slider player2SliderHmin, player2SliderSmin, player2SliderVmin, player2SliderHmax, player2SliderSmax, player2SliderVmax;
-    [SerializeField] private UnityEngine.UI.Text player1TextHmin, player1TextSmin, player1TextVmin, player1TextHmax, player1TextSmax, player1TextVmax;
-    [SerializeField] private UnityEngine.UI.Text player2TextHmin, player2TextSmin, player2TextVmin, player2TextHmax, player2TextSmax, player2TextVmax;
-    [SerializeField] private UnityEngine.UI.Image player1Camera;
-    [SerializeField] private UnityEngine.UI.Image player2Camera;
-    [SerializeField] private UnityEngine.UI.Button buttonSubmit, buttonCancel, buttonReset;
+    [SerializeField] private Slider player1SliderHmin, player1SliderSmin, player1SliderVmin, player1SliderHmax, player1SliderSmax, player1SliderVmax;
+    [SerializeField] Slider player2SliderHmin, player2SliderSmin, player2SliderVmin, player2SliderHmax, player2SliderSmax, player2SliderVmax;
+    [SerializeField] TextMeshProUGUI player1TextHmin, player1TextSmin, player1TextVmin, player1TextHmax, player1TextSmax, player1TextVmax;
+    [SerializeField] TextMeshProUGUI player2TextHmin, player2TextSmin, player2TextVmin, player2TextHmax, player2TextSmax, player2TextVmax;
+    [SerializeField] Image player1Camera;
+    [SerializeField] Image player2Camera;
 
     private VideoCapture videoCapture;
     private Texture2D player1Texture, player2Texture;
@@ -54,10 +55,6 @@ public class Settings : MonoBehaviour
         player2SliderVmax.onValueChanged.AddListener(delegate { Player2VmaxValueChange(); });
 
         LoadPrefs();
-
-        buttonSubmit.onClick.AddListener(ButtonSubmit);
-        buttonCancel.onClick.AddListener(ButtonCancel);
-        buttonReset.onClick.AddListener(ButtonReset);
     }
 
     // Update is called once per frame
@@ -195,7 +192,7 @@ public class Settings : MonoBehaviour
         videoCapture.Stop();
     }
 
-    void ButtonSubmit()
+    public void ButtonSubmit()
     {
         // Recuperer les valeurs Hmin, Hmax, Smin, Smax, Vmin, Vmax pour les deux joueurs
 
@@ -225,13 +222,13 @@ public class Settings : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void ButtonCancel()
+    public void ButtonCancel()
     {
         menuManager.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }
 
-    void ButtonReset()
+    public void ButtonReset()
     {
         player1SliderHmax.value = 179;
         player1SliderSmax.value = 255;
@@ -252,23 +249,23 @@ public class Settings : MonoBehaviour
         if (PlayerPrefs.HasKey("player1conf"))
         {
             DetectionConfig player1conf = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player1conf"));
-            player1SliderHmax.value = player1conf.maxValueH;
-            player1SliderSmax.value = player1conf.maxValueS;
-            player1SliderVmax.value = player1conf.maxValueV;
-            player1SliderHmin.value = player1conf.minValueH;
-            player1SliderSmin.value = player1conf.minValueS;
-            player1SliderVmin.value = player1conf.minValueV;
+            player1SliderHmax.value = player1HMax = (int)player1conf.maxValueH;
+            player1SliderSmax.value = player1SMax = (int)player1conf.maxValueS;
+            player1SliderVmax.value = player1VMax = (int)player1conf.maxValueV;
+            player1SliderHmin.value = player1HMin = (int)player1conf.minValueH;
+            player1SliderSmin.value = player1SMin = (int)player1conf.minValueS;
+            player1SliderVmin.value = player1VMin = (int)player1conf.minValueV;
         }
 
         if (PlayerPrefs.HasKey("player2conf"))
         {
             DetectionConfig player2conf = JsonUtility.FromJson<DetectionConfig>(PlayerPrefs.GetString("player2conf"));
-            player2SliderHmax.value = player2conf.maxValueH;
-            player2SliderSmax.value = player2conf.maxValueS;
-            player2SliderVmax.value = player2conf.maxValueV;
-            player2SliderHmin.value = player2conf.minValueH;
-            player2SliderSmin.value = player2conf.minValueS;
-            player2SliderVmin.value = player2conf.minValueV;
+            player2SliderHmax.value = player2HMax = (int)player2conf.maxValueH;
+            player2SliderSmax.value = player2SMax = (int)player2conf.maxValueS;
+            player2SliderVmax.value = player2VMax = (int)player2conf.maxValueV;
+            player2SliderHmin.value = player2HMin = (int)player2conf.minValueH;
+            player2SliderSmin.value = player2SMin = (int)player2conf.minValueS;
+            player2SliderVmin.value = player2VMin = (int)player2conf.minValueV;
         }
     }
 
