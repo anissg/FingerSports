@@ -47,6 +47,11 @@ public class BasketBall : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GetComponent<AudioSource>().Play();
+    }
+
     private void Start()
     {
         Scoring = false;
