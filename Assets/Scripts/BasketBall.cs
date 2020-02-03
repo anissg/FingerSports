@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class BasketBall : MonoBehaviour
 {
     private bool Scoring = false;
     private bool BottomScoring = false;
@@ -20,11 +20,11 @@ public class Ball : MonoBehaviour
             { 
                 if (transform.position.x > 0f)
                 {
-                    GameManager.PlayerTwoScore++;
+                    BasketballGameManager.PlayerOneScore++;
                 }
                 else
                 {
-                    GameManager.PlayerOneScore++;
+                    BasketballGameManager.PlayerTwoScore++;
                 }
                 Scoring = false;
             }
