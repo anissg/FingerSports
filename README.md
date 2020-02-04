@@ -2,9 +2,9 @@
 
 ### Le jeu
 
-Finger Sports est un jeu PC où deux joueurs s'affrontent dans différents mini jeux de sports, avec une particularité : Ils ne jouent pas avec une manette ou un clavier, mais avec leurs doigts. À la fin du timer, le joueur avec le plus de points gagne la partie. Les deux jeux proposés sont les sports de :
+Finger Sports est un jeu PC où deux joueurs s'affrontent dans différents mini jeux de sports, avec une particularité : ils ne jouent pas avec une manette ou un clavier, mais avec leurs doigts. À la fin du timer, le joueur avec le plus de points gagne la partie. Les deux jeux proposés sont les sports de :
 
-* 🏀 Basketball 
+* 🏀 Basketball
 * ⚽ Football
 
 Pour ça, il suffit simplement d'une webcam, ainsi que de deux papiers de couleurs vives (et distinctes l'une de l'autre) enroulés autour de leur doigt (les post-it ont l'avantage d'être de la bonne taille et d'être autocollants, sinon utilisez ceux fournis plus bas dans ce *README* à découper).
