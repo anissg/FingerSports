@@ -35,11 +35,11 @@ Nous utilisons [Emgu CV](http://www.emgu.com/wiki/index.php/Main_Page) qui est u
 
 Afin d'améliorer le résultat nous appliquons une érosion et une dilatation sur chacune des images, et nous détectons le contour de la plus grande forme (qui, si tout c'est bien passé, correspond au papier autour du doigt du joueur).
 
+![Détection](/Images/Detection.jpg)
+
 On cherche le rectangle qui englobe au mieux ce contour, et grâce à ce rectangle, on peut récupérer sa rotation et sa position.
 
 Par contre, nous n'appliquons pas directement sa position à la main du joueur dans le jeu, nous calculons le déplacement entre plusieurs frames pour le retranscrire sous forme d'un delta dans le jeu.
-
-![Détection](/Images/Detection.jpg)
 
 ### Vidéo
 
