@@ -17,6 +17,10 @@ Pour ça, il suffit simplement d'une webcam, ainsi que de deux papiers de couleu
 
 ![Football](/Images/Football.jpg)
 
+### Pour jouer au jeu
+
+Téléchargez les sources et ouvrez le projet avec *Unity 2019.3.0f6*, ou téléchargez directement la release.
+
 Un menu de paramètres vous permet simplement d'adapter les valeurs utilisées pour la détection, afin qu'elle prenne en compte les couleurs de vos propres papiers et les différences d'éclairages d'un environnement à l'autre. Il est conseillé d'utiliser des couleurs "fluo" et qui se distinguent de la peau et des vêtements portés par les joueurs. Par défaut, les couleurs utilisées sont le **rouge** et le **bleu**.
 
 ![Papiers](/Images/Papiers.jpg)
