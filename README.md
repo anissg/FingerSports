@@ -34,3 +34,9 @@ Afin d'améliorer le résultat nous appliquons une érosion et une dilatation su
 On cherche le rectangle qui englobe au mieux ce contour, et grâce à ce rectangle, on peut récupérer sa rotation et sa position.
 
 Par contre, nous n'appliquons pas directement sa position au mains des joueurs dans le jeu, nous calculons le déplacement entre plusieurs frames pour le retranscrire sous forme d'un delta dans le jeu.
+
+![Détection](/Images/Detection.jpg)
+
+### Vidéo
+
+[![Vidéo](https://img.youtube.com/vi/ScMzIvxBSi4/0.jpg)](https://www.youtube.com/watch?v=ScMzIvxBSi4)
