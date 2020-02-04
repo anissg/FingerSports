@@ -11205,7 +11205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b1429932605094790773ac7c5058bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Minutes: 5
+  Minutes: 3
   PlayerOneScoreLabel: {fileID: 617505302}
   PlayerTwoScoreLabel: {fileID: 1431292754}
   Seconds: 0

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BasketballGameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public int Minutes;
     private int min;
@@ -26,6 +26,8 @@ public class BasketballGameManager : MonoBehaviour
         Timeout = false;
         min = Minutes;
         sec = Seconds;
+        PlayerOneScore = 0;
+        PlayerTwoScore = 0;
     }
 
     private void Update()

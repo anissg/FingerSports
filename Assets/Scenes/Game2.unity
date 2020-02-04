@@ -15812,14 +15812,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b1429932605094790773ac7c5058bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Minutes: 5
+  Minutes: 3
   PlayerOneScoreLabel: {fileID: 617505302}
   PlayerTwoScoreLabel: {fileID: 1431292754}
   Seconds: 0
   TimerLabel: {fileID: 1553757991}
   ResultPanel: {fileID: 24328164}
   resultText: {fileID: 1922457854}
-  ball: {fileID: 0}
+  ball: {fileID: 635390828}
 --- !u!1 &1918380760
 GameObject:
   m_ObjectHideFlags: 0
