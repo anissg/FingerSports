@@ -1,5 +1,7 @@
 # 👉 Finger Sports
 
+*Un projet de Anis HADJARI, David ETIENNE, et Romain ROY.*
+
 ### Le jeu
 
 Finger Sports est un jeu PC où deux joueurs s'affrontent dans différents mini jeux de sports, avec une particularité : ils ne jouent pas avec une manette ou un clavier, mais avec leurs doigts. À la fin du timer, le joueur avec le plus de points gagne la partie. Les deux jeux proposés sont les sports de :
