@@ -43,4 +43,4 @@ Par contre, nous n'appliquons pas directement sa position à la main du joueur d
 
 ### Vidéo
 
-[![Vidéo](https://img.youtube.com/vi/ScMzIvxBSi4/0.jpg)](https://www.youtube.com/watch?v=ScMzIvxBSi4)
+[![Vidéo](https://img.youtube.com/vi/4bMgJtigmAY/0.jpg)](https://www.youtube.com/watch?v=4bMgJtigmAY)
