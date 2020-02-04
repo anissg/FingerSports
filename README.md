@@ -29,7 +29,7 @@ Nous utilisons [Emgu CV](http://www.emgu.com/wiki/index.php/Main_Page) qui est u
 
 À chaque capture, nous convertissons l'image dans l'espace de couleurs **HSV**, nous appliquons un flou Gaussien, et à partir de cette nouvelle image nous en créons deux (une pour chaque joueur) que l'on transforme en image binaire (noir et blanc) à partir des seuils configurés dans les paramètres sauvegardés.
 
-Afin d'améliorer le résultat nous appliquons une érosion et une dilatation sur chacune des images, et nous détecter le contour de la plus grande forme (qui, si tout c'est bien passé, correspond au papier autour du doigt du joueur).
+Afin d'améliorer le résultat nous appliquons une érosion et une dilatation sur chacune des images, et nous détectons le contour de la plus grande forme (qui, si tout c'est bien passé, correspond au papier autour du doigt du joueur).
 
 On cherche le rectangle qui englobe au mieux ce contour, et grâce à ce rectangle, on peut récupérer sa rotation et sa position.
 
