@@ -37,8 +37,8 @@ public class Settings : MonoBehaviour
 
         videoCapture.ImageGrabbed += imageGrabbed;
 
-        player1Texture = new Texture2D(videoCapture.Width, videoCapture.Height, TextureFormat.BGRA32, false);
-        player2Texture = new Texture2D(videoCapture.Width, videoCapture.Height, TextureFormat.BGRA32, false);
+        player1Texture = new Texture2D(videoCapture.Width, videoCapture.Height, TextureFormat.RGBA32, false);
+        player2Texture = new Texture2D(videoCapture.Width, videoCapture.Height, TextureFormat.RGBA32, false);
 
         player1SliderHmin.onValueChanged.AddListener(delegate { Player1HminValueChange(); });
         player1SliderSmin.onValueChanged.AddListener(delegate { Player1SminValueChange(); });
@@ -182,7 +182,9 @@ public class Settings : MonoBehaviour
 
     void applyTextureToImage(UnityEngine.UI.Image image, Texture2D texture, Mat mat)
     {
-        texture.LoadRawTextureData(mat.ToImage<Bgra, Byte>().Bytes);
+        CvInvoke.Resize(mat, mat, new Size(videoCapture.Width, videoCapture.Height));
+        CvInvoke.CvtColor(mat, mat, ColorConversion.Bgr2Rgba);
+        texture.LoadRawTextureData(mat.ToImage<Rgba, Byte>().Bytes);
         texture.Apply();
         image.sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 1.0f);
     }
