@@ -322,9 +322,9 @@ public class PlayerManager : MonoBehaviour
             //Debug Display
             if (debugFlag)
             {
-                //CvInvoke.Imshow("cam", imgBGR);
-                //CvInvoke.Imshow("p1", player1ThresholdOUT);
-                //CvInvoke.Imshow("p2", player2ThresholdOUT);
+                CvInvoke.Imshow("cam", imgBGR);
+                CvInvoke.Imshow("p1", player1ThresholdOUT);
+                CvInvoke.Imshow("p2", player2ThresholdOUT);
             }
         }
     }

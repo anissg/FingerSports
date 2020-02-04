@@ -20,11 +20,11 @@ public class BasketBall : MonoBehaviour
             { 
                 if (transform.position.x > 0f)
                 {
-                    BasketballGameManager.PlayerOneScore++;
+                    GameManager.PlayerOneScore++;
                 }
                 else
                 {
-                    BasketballGameManager.PlayerTwoScore++;
+                    GameManager.PlayerTwoScore++;
                 }
                 Scoring = false;
             }

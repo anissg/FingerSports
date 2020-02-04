@@ -15,11 +15,11 @@ public class FootBall : MonoBehaviour
 
             if (transform.position.x > 0f)
             {
-                BasketballGameManager.PlayerOneScore++;
+                GameManager.PlayerOneScore++;
             }
             else
             {
-                BasketballGameManager.PlayerTwoScore++;
+                GameManager.PlayerTwoScore++;
             }
 
             StartCoroutine("Score");
